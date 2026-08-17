@@ -130,7 +130,7 @@ func (r *Recorder) handle(resp playwright.Response) error {
 		"status":           resp.Status(),
 		"request_headers":  safeHeaders(req.Headers()),
 		"request_body":     postData,
-		"response_headers": resp.Headers(),
+		"response_headers": safeHeaders(resp.Headers()),
 		"response_body":    json.RawMessage(body),
 		"auth_scheme":      scheme,
 		"token_hint":       hint,
@@ -343,11 +343,16 @@ func (r *Recorder) Count() int {
 // чтобы не принять её за настоящий заголовок.
 const redacted = "<вырезано>"
 
+// safeHeaders вычищает всё, чем можно притвориться владельцем счёта.
+//
+// Применяется и к ответам: в set-cookie приезжают сессионные куки банка, и
+// без этого дамп с ними лёг бы на диск в открытом виде — при том что рядом
+// написано «токен на диск не попадёт».
 func safeHeaders(h map[string]string) map[string]string {
 	out := make(map[string]string, len(h))
 	for k, v := range h {
 		switch strings.ToLower(k) {
-		case "authorization", "cookie", "x-csrf-token", "x-auth-token":
+		case "authorization", "cookie", "set-cookie", "x-csrf-token", "x-auth-token":
 			out[k] = redacted
 		default:
 			out[k] = v
