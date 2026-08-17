@@ -1,0 +1,85 @@
+{
+  "accounts": {
+    "url": "https://online.sbpvtb.ru/services/ЗАМЕНИТЕ/НА/НАЙДЕННЫЙ/ПУТЬ",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {{token}}"
+    },
+    "body": {},
+    "token": {
+      "storage": "session",
+      "key": "ЗАМЕНИТЕ_НА_КЛЮЧ_ИЗ_STORAGE",
+      "path": "access_token"
+    },
+    "list": "data.accounts",
+    "fields": {
+      "id": "id",
+      "name": "name",
+      "number": "maskedNumber",
+      "balance": "balance.amount",
+      "currency": "balance.currency"
+    }
+  },
+
+  "cards": {
+    "url": "https://online.sbpvtb.ru/services/ЗАМЕНИТЕ/НА/НАЙДЕННЫЙ/ПУТЬ",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {{token}}"
+    },
+    "token": {
+      "storage": "session",
+      "key": "ЗАМЕНИТЕ_НА_КЛЮЧ_ИЗ_STORAGE",
+      "path": "access_token"
+    },
+    "list": "cards.@values",
+    "fields": {
+      "id": "publicId",
+      "name": "name",
+      "number": "number",
+      "balance": "amount.amount",
+      "currency": "amount.currency"
+    }
+  },
+
+  "transactions": {
+    "url": "https://online.sbpvtb.ru/services/ЗАМЕНИТЕ/НА/НАЙДЕННЫЙ/ПУТЬ?dateFrom=&dateTo=",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {{token}}"
+    },
+    "body": {
+      "count": 20
+    },
+    "params": {
+      "dateFrom": {
+        "offset": "-32d",
+        "layout": "2006-01-02T15:04:05.000-07:00"
+      },
+      "dateTo": {
+        "offset": "0d",
+        "layout": "2006-01-02T15:04:05.000-07:00"
+      }
+    },
+    "token": {
+      "storage": "session",
+      "key": "ЗАМЕНИТЕ_НА_КЛЮЧ_ИЗ_STORAGE",
+      "path": "access_token"
+    },
+    "list": "data.items",
+    "fields": {
+      "id": "id",
+      "time": "operationDate",
+      "amount": "amount.sum",
+      "currency": "amount.currency",
+      "direction": "direction",
+      "title": "counterpartyName",
+      "card": "cardMaskedNumber"
+    },
+    "time_layout": "",
+    "in_values": ["CREDIT", "IN", "INCOME"]
+  }
+}

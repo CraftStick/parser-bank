@@ -1,0 +1,24 @@
+# Секреты и личные данные — ничего из этого не должно уехать в репозиторий
+.env
+data/
+
+# endpoints.json содержит внутренние адреса вашего кабинета.
+# В репозитории лежит только endpoints.example.json
+endpoints.json
+endpoints.suggested.json
+
+# transfer.json может содержать реквизиты и шаги перевода.
+# В репозитории лежит только transfer.example.json
+transfer.json
+
+# Сборка
+/bin/
+/bot
+/recorder
+*.exe
+
+# Случайный вывод отладки
+dry.txt
+
+# Системное
+.DS_Store
