@@ -4,7 +4,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/valerakrut/parserbank/internal/config"
+	"github.com/CraftStick/parser-bank/internal/config"
 )
 
 func TestBrowserArgs(t *testing.T) {

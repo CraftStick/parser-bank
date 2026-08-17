@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/valerakrut/parserbank/internal/bank"
-	"github.com/valerakrut/parserbank/internal/store"
+	"github.com/CraftStick/parser-bank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/store"
 )
 
 // Events — куда поллер сообщает о происходящем.

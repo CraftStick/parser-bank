@@ -57,13 +57,30 @@ Chromium с постоянным профилем (Playwright)   профиль 
 
 ## Установка
 
-Нужны Go 1.24+, Node.js и системный Chrome.
+Нужны Node.js и Chrome — через них работает драйвер браузера. Go нужен только
+для сборки из исходников.
+
+**Сразу на сервер, готовым бинарником** (Go не нужен):
 
 ```bash
+curl -fsSL https://github.com/CraftStick/parser-bank/releases/latest/download/parserbank-linux-amd64.tar.gz | tar -xz
+cd parserbank-linux-amd64 && ./install-driver.sh
+```
+
+Для ARM-сервера — `parserbank-linux-arm64.tar.gz`. В архиве лежат `bot`,
+`doctor`, `recorder`, `mapper`, скрипт установки драйвера и образцы конфигов.
+
+**Из исходников:**
+
+```bash
+git clone https://github.com/CraftStick/parser-bank.git && cd parser-bank
 cp .env.example .env      # обязательны TG_BOT_TOKEN и TG_OWNER_ID
 ./scripts/install-driver.sh
 make doctor               # чеклист окружения, не заходя в банк
 ```
+
+Отдельные утилиты ставятся и через Go:
+`go install github.com/CraftStick/parser-bank/cmd/bot@latest`.
 
 Драйвер ставится скриптом: playwright-go тянет его с выключенного Microsoft'ом
 CDN, тот же пакет берётся из npm. Браузер не качается — используется системный
@@ -131,7 +148,8 @@ DNS, потом проба браузером. Именно браузером �
 `RUNTIME=vps` включает экономию памяти в Chromium (один рендерер, без
 расширений и фоновых сервисов); отпечаток браузера при этом не трогается.
 `HEADLESS=true` антифрод замечает, поэтому на сервере правильнее headful под
-`xvfb-run`, а первый вход — через VNC или копированием профиля с макбука.
+`xvfb-run`, а первый вход — через VNC или копированием профиля с макбука
+(`rsync -a data/profile/ user@vps:/opt/parserbank/data/profile/`).
 
 Расход: браузер ~1,1 ГБ (на Linux меньше), драйвер 26 МБ, бот 13 МБ. Нужно
 2 ГБ RAM — на 1 ГБ OOM-killer прибьёт Chromium вместе с сессией. Заграничный

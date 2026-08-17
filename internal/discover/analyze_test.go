@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/valerakrut/parserbank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/bank"
 )
 
 // writeDump кладёт в каталог один дамп в том формате, который пишет recorder.

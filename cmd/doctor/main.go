@@ -12,9 +12,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/valerakrut/parserbank/internal/bank"
-	"github.com/valerakrut/parserbank/internal/config"
-	"github.com/valerakrut/parserbank/internal/discover"
+	"github.com/CraftStick/parser-bank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/config"
+	"github.com/CraftStick/parser-bank/internal/discover"
 )
 
 // status различает поломку и просто невыполненный шаг. Разница принципиальная:

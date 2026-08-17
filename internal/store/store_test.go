@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/valerakrut/parserbank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/bank"
 )
 
 func open(t *testing.T, limit int) *Store {

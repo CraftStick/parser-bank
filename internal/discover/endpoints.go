@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/CraftStick/parser-bank/internal/bank"
 	"github.com/tidwall/gjson"
-	"github.com/valerakrut/parserbank/internal/bank"
 )
 
 // Endpoints собирает конфиг из найденных кандидатов.

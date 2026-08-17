@@ -17,8 +17,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/CraftStick/parser-bank/internal/bank"
 	"github.com/tidwall/gjson"
-	"github.com/valerakrut/parserbank/internal/bank"
 )
 
 // minScore — порог, ниже которого кандидат не считается находкой. Подобран

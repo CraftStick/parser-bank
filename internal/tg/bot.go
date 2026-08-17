@@ -12,9 +12,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/valerakrut/parserbank/internal/bank"
-	"github.com/valerakrut/parserbank/internal/config"
-	"github.com/valerakrut/parserbank/internal/store"
+	"github.com/CraftStick/parser-bank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/config"
+	"github.com/CraftStick/parser-bank/internal/store"
 	tele "gopkg.in/telebot.v4"
 )
 

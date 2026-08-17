@@ -1,4 +1,4 @@
-module github.com/valerakrut/parserbank
+module github.com/CraftStick/parser-bank
 
 go 1.25.0
 

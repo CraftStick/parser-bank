@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/CraftStick/parser-bank/internal/config"
 	"github.com/playwright-community/playwright-go"
-	"github.com/valerakrut/parserbank/internal/config"
 )
 
 // Browser — обёртка над persistent-контекстом Chromium.

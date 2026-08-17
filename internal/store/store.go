@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/valerakrut/parserbank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/bank"
 	_ "modernc.org/sqlite" // чистый Go, без cgo — важно для сборки под VPS
 )
 

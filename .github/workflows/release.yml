@@ -1,0 +1,63 @@
+# Собирает готовые бинарники под Linux и кладёт их в релиз.
+#
+# Смысл — не таскать сборку с ноутбука на сервер: на VPS достаточно скачать
+# архив одной командой. Go для этого на сервере не нужен, а вот Node.js и
+# Chrome нужны всё равно — через них работает драйвер браузера.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  # Ручной запуск: собрать, ничего не тегируя.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Тесты
+        run: go test ./...
+
+      - name: Сборка
+        run: |
+          set -euo pipefail
+          for arch in amd64 arm64; do
+            out="parserbank-linux-$arch"
+            mkdir -p "dist/$out"
+
+            for cmd in bot doctor recorder mapper; do
+              # CGO не нужен: драйвер SQLite написан на чистом Go.
+              GOOS=linux GOARCH="$arch" CGO_ENABLED=0 \
+                go build -trimpath -ldflags="-s -w" \
+                -o "dist/$out/$cmd" "./cmd/$cmd"
+            done
+
+            # Кладём рядом то, без чего бинарник бесполезен: скрипт установки
+            # драйвера и образцы конфигов.
+            cp scripts/install-driver.sh "dist/$out/"
+            cp .env.example endpoints.example.json transfer.example.json README.md "dist/$out/"
+
+            tar -czf "dist/$out.tar.gz" -C dist "$out"
+          done
+
+      - name: Релиз
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" dist/*.tar.gz --generate-notes
+
+      - name: Артефакты для ручного запуска
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: parserbank-linux
+          path: dist/*.tar.gz

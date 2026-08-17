@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/valerakrut/parserbank/internal/config"
-	"github.com/valerakrut/parserbank/internal/discover"
+	"github.com/CraftStick/parser-bank/internal/config"
+	"github.com/CraftStick/parser-bank/internal/discover"
 )
 
 func main() {

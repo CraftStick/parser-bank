@@ -9,11 +9,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/valerakrut/parserbank/internal/bank"
-	"github.com/valerakrut/parserbank/internal/config"
-	"github.com/valerakrut/parserbank/internal/poller"
-	"github.com/valerakrut/parserbank/internal/store"
-	"github.com/valerakrut/parserbank/internal/tg"
+	"github.com/CraftStick/parser-bank/internal/bank"
+	"github.com/CraftStick/parser-bank/internal/config"
+	"github.com/CraftStick/parser-bank/internal/poller"
+	"github.com/CraftStick/parser-bank/internal/store"
+	"github.com/CraftStick/parser-bank/internal/tg"
 )
 
 // Сколько ошибок подряд терпим, прежде чем заподозрить, что зеркало умерло.
